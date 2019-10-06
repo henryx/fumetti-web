@@ -29,15 +29,8 @@
       <v-toolbar-title>Fumetti</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout
-          justify-center
-          align-center
-        >
-          <v-flex text-xs-center>
+      <v-container>
             <router-view/>
-          </v-flex>
-        </v-layout>
       </v-container>
     </v-content>
     <v-footer color="indigo" app>
