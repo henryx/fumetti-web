@@ -4,7 +4,10 @@ import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 import router from './router';
 import VueRouter from "vue-router";
+
 import '@fortawesome/fontawesome-free/css/all.css';
+import 'material-design-icons/iconfont/material-icons.css'
+import 'typeface-roboto/index.css'
 
 Vue.config.productionTip = false;
 
