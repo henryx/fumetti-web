@@ -12,27 +12,43 @@
                                 <v-select label="Serie*" :items="serieItems" required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md4>
-                                <v-text-field label="Numero" type="number" @keypress="isNumber"></v-text-field>
+                                <v-text-field label="Numero*" type="number" @keypress="isNumber" required></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6 md4>
-                                <v-text-field label="Prezzo*" required type="number" @keypress="isNumber"></v-text-field>
+                                <v-menu v-model="dateMenu"
+                                        :close-on-content-click="false"
+                                        :nudge-right="40"
+                                        lazy
+                                        transition="scale-transition"
+                                        offset-y
+                                        full-width
+                                        min-width="290px">
+                                    <template v-slot:activator="{ on }">
+                                        <v-text-field
+                                            v-model="date"
+                                            label="Data di pubblicazione"
+                                            prepend-icon="event"
+                                            readonly
+                                            v-on="on"
+                                        ></v-text-field>
+                                    </template>
+                                    <v-date-picker v-model="date" @input="dateMenu = false"></v-date-picker>
+                                </v-menu>
                             </v-flex>
-                            <v-flex xs12 sm6 md4>
+                            <v-flex xs12 sm6 md10>
+                                <v-text-field class="right-input" label="Prezzo*" required type="number" @keypress="isNumber"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md2>
                                 <v-text-field label="Valuta*" required></v-text-field>
                             </v-flex>
-                            <v-flex xs12 sm6>
-                                <v-select
-                                        :items="['0-17', '18-29', '30-54', '54+']"
-                                        label="Age*"
-                                        required
-                                ></v-select>
+                            <v-flex xs12 sm6 md6>
+                                <v-select label="Rilegatura*" :items="rilItems" required></v-select>
                             </v-flex>
-                            <v-flex xs12 sm6>
-                                <v-autocomplete
-                                        :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                                        label="Interests"
-                                        multiple
-                                ></v-autocomplete>
+                            <v-flex xs12 sm6 md6>
+                                <v-select label="Conservazione*" :items="statusItems" required></v-select>
+                            </v-flex>
+                            <v-flex xs12>
+                                <v-text-field label="Note"></v-text-field>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -51,9 +67,12 @@
 <script>
     export default {
         data: () => ({
+            dateMenu: false,
+            date: new Date().toISOString().substr(0, 10),
             dialog: false,
-            items: ['0-17', '18-29', '30-54', '54+'],
             serieItems: [],
+            rilItems: [],
+            statusItems: []
         }),
         methods: {
             saveAlbo() {
@@ -75,3 +94,9 @@
         }
     }
 </script>
+
+<style scoped>
+    .right-input input {
+        text-align: right
+    }
+</style>
