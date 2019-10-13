@@ -65,6 +65,8 @@
 </template>
 
 <script>
+import serie from "../api/serie";
+
     export default {
         data: () => ({
             dateMenu: false,
@@ -75,6 +77,18 @@
             statusItems: []
         }),
         methods: {
+            init() {
+                let self = this;
+                
+                serie.getSerie()
+                .then(r => {
+                    // TODO: validate returned values;
+                    self.serieItems = r.data;
+                })
+                .catch(e => {
+                    self.serieItems = [];
+                });
+            },
             saveAlbo() {
                 this.dialog = false
             },
@@ -95,6 +109,8 @@
             Show() {
                 this.dialog = true
             }
+        }, mounted() {
+            this.init()
         }
     }
 </script>
