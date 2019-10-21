@@ -83,7 +83,11 @@ import serie from "../api/serie";
                 serie.getSerie()
                 .then(r => {
                     // TODO: validate returned values;
-                    self.serieItems = r.data;
+                    if (r.data.op === "ok") {
+                        for (let item of r.data.data) {
+                            self.serieItems.push({text: item.name, value: item.id});
+                        }
+                    }
                 })
                 .catch(e => {
                     self.serieItems = [];
