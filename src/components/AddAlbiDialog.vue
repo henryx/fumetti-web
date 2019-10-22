@@ -66,6 +66,7 @@
 
 <script>
 import serie from "../api/serie";
+import lookup from "../api/lookup";
 
     export default {
         data: () => ({
@@ -80,6 +81,7 @@ import serie from "../api/serie";
         methods: {
             init() {
                 this.populateSerie();
+                this.populateValuta();
             },
             saveAlbo() {
                 this.dialog = false
@@ -114,6 +116,22 @@ import serie from "../api/serie";
                     })
                     .catch(e => {
                         self.serieItems = [];
+                    });
+            },
+            populateValuta() {
+                let self = this
+
+                lookup.getValuta()
+                    .then(r => {
+                        // TODO: validate returned values;
+                        if (r.data.op === "ok") {
+                            for (let item of r.data.data) {
+                                self.valutaItems.push({text: item.name, value: item.id});
+                            }
+                        }
+                    })
+                    .catch(e => {
+                        self.valutaItems = [];
                     });
             },
         },
