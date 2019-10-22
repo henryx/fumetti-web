@@ -82,9 +82,11 @@ import lookup from "../api/lookup";
             init() {
                 this.serieItems = [];
                 this.valutaItems = [];
+                this.rilItems = [];
                 
                 this.populateSerie();
                 this.populateValuta();
+                this.populateRilegatura();
             },
             saveAlbo() {
                 this.dialog = false
@@ -136,6 +138,21 @@ import lookup from "../api/lookup";
                     .catch(e => {
                     });
             },
+            populateRilegatura() {
+                let self = this
+
+                lookup.getRilegatura()
+                    .then(r => {
+                        // TODO: validate returned values;
+                        if (r.data.op === "ok") {
+                            for (let item of r.data.data) {
+                                self.rilItems.push({text: item.name, value: item.id});
+                            }
+                        }
+                    })
+                    .catch(e => {
+                    });
+            }
         },
         mounted() {
             this.init()
