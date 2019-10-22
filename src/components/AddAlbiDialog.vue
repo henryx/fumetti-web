@@ -39,7 +39,7 @@
                                 <v-text-field class="right-input" label="Prezzo*" required type="number" @keypress="isNumber"></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6 md2>
-                                <v-text-field label="Valuta*" required></v-text-field>
+                                <v-select label="Valuta*" :items="valutaItems" required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md6>
                                 <v-select label="Rilegatura*" :items="rilItems" required></v-select>
@@ -74,7 +74,8 @@ import serie from "../api/serie";
             dialog: false,
             serieItems: [],
             rilItems: [],
-            statusItems: []
+            statusItems: [],
+            valutaItems: []
         }),
         methods: {
             init() {
