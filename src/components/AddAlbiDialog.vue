@@ -79,20 +79,7 @@ import serie from "../api/serie";
         }),
         methods: {
             init() {
-                let self = this;
-                
-                serie.getSerie()
-                .then(r => {
-                    // TODO: validate returned values;
-                    if (r.data.op === "ok") {
-                        for (let item of r.data.data) {
-                            self.serieItems.push({text: item.name, value: item.id});
-                        }
-                    }
-                })
-                .catch(e => {
-                    self.serieItems = [];
-                });
+                this.populateSerie();
             },
             saveAlbo() {
                 this.dialog = false
@@ -113,8 +100,24 @@ import serie from "../api/serie";
             },
             Show() {
                 this.dialog = true
-            }
-        }, mounted() {
+            },
+            populateSerie() {
+                let self = this;
+                serie.getSerie()
+                    .then(r => {
+                        // TODO: validate returned values;
+                        if (r.data.op === "ok") {
+                            for (let item of r.data.data) {
+                                self.serieItems.push({text: item.name, value: item.id});
+                            }
+                        }
+                    })
+                    .catch(e => {
+                        self.serieItems = [];
+                    });
+            },
+        },
+        mounted() {
             this.init()
         }
     }
