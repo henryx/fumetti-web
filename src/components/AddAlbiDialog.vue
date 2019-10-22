@@ -80,6 +80,9 @@ import lookup from "../api/lookup";
         }),
         methods: {
             init() {
+                this.serieItems = [];
+                this.valutaItems = [];
+                
                 this.populateSerie();
                 this.populateValuta();
             },
@@ -105,6 +108,7 @@ import lookup from "../api/lookup";
             },
             populateSerie() {
                 let self = this;
+
                 serie.getSerie()
                     .then(r => {
                         // TODO: validate returned values;
@@ -115,7 +119,6 @@ import lookup from "../api/lookup";
                         }
                     })
                     .catch(e => {
-                        self.serieItems = [];
                     });
             },
             populateValuta() {
@@ -131,7 +134,6 @@ import lookup from "../api/lookup";
                         }
                     })
                     .catch(e => {
-                        self.valutaItems = [];
                     });
             },
         },
