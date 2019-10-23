@@ -83,10 +83,12 @@ import lookup from "../api/lookup";
                 this.serieItems = [];
                 this.valutaItems = [];
                 this.rilItems = [];
+                this.statusItems = [];
                 
                 this.populateSerie();
                 this.populateValuta();
                 this.populateRilegatura();
+                this.populateConservazione();
             },
             saveAlbo() {
                 this.dialog = false
@@ -147,6 +149,22 @@ import lookup from "../api/lookup";
                         if (r.data.op === "ok") {
                             for (let item of r.data.data) {
                                 self.rilItems.push({text: item.name, value: item.id});
+                            }
+                        }
+                    })
+                    .catch(e => {
+                    });
+            },
+
+            populateConservazione() {
+                let self = this
+
+                lookup.getConservazione()
+                    .then(r => {
+                        // TODO: validate returned values;
+                        if (r.data.op === "ok") {
+                            for (let item of r.data.data) {
+                                self.statusItems.push({text: item.name, value: item.id});
                             }
                         }
                     })
