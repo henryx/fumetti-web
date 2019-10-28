@@ -9,10 +9,10 @@
                     <v-container grid-list-md>
                         <v-layout wrap>
                             <v-flex xs12 sm6 md4>
-                                <v-select label="Serie*" :items="serieItems" required></v-select>
+                                <v-select v-model="data.serie" label="Serie*" :items="serieItems" required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md4>
-                                <v-text-field label="Numero*" type="number" @keypress="isNumber" required></v-text-field>
+                                <v-text-field v-model="data.numero" label="Numero*" type="number" @keypress="isNumber" required></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6 md4>
                                 <v-menu v-model="dateMenu"
@@ -25,30 +25,30 @@
                                         min-width="290px">
                                     <template v-slot:activator="{ on }">
                                         <v-text-field
-                                            v-model="date"
+                                            v-model="data.date"
                                             label="Data di pubblicazione"
                                             prepend-icon="event"
                                             readonly
                                             v-on="on"
                                         ></v-text-field>
                                     </template>
-                                    <v-date-picker v-model="date" @input="dateMenu = false"></v-date-picker>
+                                    <v-date-picker v-model="data.date" @input="dateMenu = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                             <v-flex xs12 sm6 md10>
-                                <v-text-field class="right-input" label="Prezzo*" required type="number" @keypress="isNumber"></v-text-field>
+                                <v-text-field v-model="data.prezzo" class="right-input" label="Prezzo*" required type="number" @keypress="isNumber"></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6 md2>
-                                <v-select label="Valuta*" :items="valutaItems" required></v-select>
+                                <v-select v-model="data.valuta" label="Valuta*" :items="valutaItems" required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md6>
-                                <v-select label="Rilegatura*" :items="rilItems" required></v-select>
+                                <v-select v-model="data.rilegatura" label="Rilegatura*" :items="rilItems" required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md6>
-                                <v-select label="Conservazione*" :items="statusItems" required></v-select>
+                                <v-select v-model="data.conservazione" label="Conservazione*" :items="statusItems" required></v-select>
                             </v-flex>
                             <v-flex xs12>
-                                <v-text-field label="Note"></v-text-field>
+                                <v-text-field v-model="data.note" label="Note"></v-text-field>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -57,7 +57,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-                    <v-btn color="blue darken-1" flat @click="dialog = false">Save</v-btn>
+                    <v-btn color="blue darken-1" flat @click="saveAlbo">Save</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -71,12 +71,21 @@ import lookup from "../api/lookup";
     export default {
         data: () => ({
             dateMenu: false,
-            date: new Date().toISOString().substr(0, 10),
             dialog: false,
             serieItems: [],
             rilItems: [],
             statusItems: [],
-            valutaItems: []
+            valutaItems: [],
+            data: {
+                date: new Date().toISOString().substr(0, 10),
+                serie: null,
+                numero: null,
+                prezzo: null,
+                valuta: null,
+                rilegatura: null,
+                conservazione: null,
+                note: null
+            }
         }),
         methods: {
             init() {
