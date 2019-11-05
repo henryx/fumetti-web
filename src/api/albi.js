@@ -7,5 +7,9 @@ export default {
 
     async getAlbiBySerie(serie) {
         return Api().get(`/albi/${serie}`)
+    },
+
+    async postAlbi(data) {
+        return Api().post("/albi", data)
     }
 }

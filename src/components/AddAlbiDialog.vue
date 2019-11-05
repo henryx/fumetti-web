@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import albi from "../api/albi";
 import serie from "../api/serie";
 import lookup from "../api/lookup";
 
@@ -100,7 +101,12 @@ import lookup from "../api/lookup";
                 this.populateConservazione();
             },
             saveAlbo() {
-                this.dialog = false
+                self = this;
+
+                albi.postAlbi(this.data)
+                    .then(() => {
+                        self.dialog = false;
+                    });
             },
             isNumber: function(evt) {
                 evt = (evt) ? evt : window.event;
