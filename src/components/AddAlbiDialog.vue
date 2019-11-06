@@ -106,6 +106,9 @@ import lookup from "../api/lookup";
                 albi.postAlbi(this.data)
                     .then(() => {
                         self.dialog = false;
+                    })
+                    .catch(() => {
+                        // TODO: manage exception if POST fails
                     });
             },
             isNumber: function(evt) {
