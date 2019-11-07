@@ -12,7 +12,8 @@
                                 <v-select v-model="data.serie" label="Serie*" :items="serieItems" required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md4>
-                                <v-text-field v-model="data.numero" label="Numero*" type="number" @keypress="isNumber" required></v-text-field>
+                                <v-text-field v-model="data.numero" label="Numero*" type="number" @keypress="isNumber"
+                                              required></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6 md4>
                                 <v-menu v-model="dateMenu"
@@ -25,27 +26,31 @@
                                         min-width="290px">
                                     <template v-slot:activator="{ on }">
                                         <v-text-field
-                                            v-model="data.date"
-                                            label="Data di pubblicazione"
-                                            prepend-icon="event"
-                                            readonly
-                                            v-on="on"
+                                                v-model="data.date"
+                                                label="Data di pubblicazione"
+                                                prepend-icon="event"
+                                                readonly
+                                                v-on="on"
                                         ></v-text-field>
                                     </template>
                                     <v-date-picker v-model="data.date" @input="dateMenu = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                             <v-flex xs12 sm6 md10>
-                                <v-text-field v-model="data.prezzo" class="right-input" label="Prezzo*" required type="number" @keypress="isNumber"></v-text-field>
+                                <v-text-field v-model="data.prezzo" class="right-input" label="Prezzo*" required
+                                              type="number" @keypress="isNumber"></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6 md2>
-                                <v-select v-model="data.valuta" label="Valuta*" :items="valutaItems" required></v-select>
+                                <v-select v-model="data.valuta" label="Valuta*" :items="valutaItems"
+                                          required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md6>
-                                <v-select v-model="data.rilegatura" label="Rilegatura*" :items="rilItems" required></v-select>
+                                <v-select v-model="data.rilegatura" label="Rilegatura*" :items="rilItems"
+                                          required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md6>
-                                <v-select v-model="data.conservazione" label="Conservazione*" :items="statusItems" required></v-select>
+                                <v-select v-model="data.conservazione" label="Conservazione*" :items="statusItems"
+                                          required></v-select>
                             </v-flex>
                             <v-flex xs12>
                                 <v-text-field v-model="data.note" label="Note"></v-text-field>
@@ -65,9 +70,9 @@
 </template>
 
 <script>
-import albi from "../api/albi";
-import serie from "../api/serie";
-import lookup from "../api/lookup";
+    import albi from "../api/albi";
+    import serie from "../api/serie";
+    import lookup from "../api/lookup";
 
     export default {
         data: () => ({
@@ -94,14 +99,14 @@ import lookup from "../api/lookup";
                 this.valutaItems = [];
                 this.rilItems = [];
                 this.statusItems = [];
-                
+
                 this.populateSerie();
                 this.populateValuta();
                 this.populateRilegatura();
                 this.populateConservazione();
             },
             saveAlbo() {
-                self = this;
+                let self = this;
 
                 albi.postAlbi(this.data)
                     .then(() => {
@@ -111,7 +116,7 @@ import lookup from "../api/lookup";
                         // TODO: manage exception if POST fails
                     });
             },
-            isNumber: function(evt) {
+            isNumber: function (evt) {
                 evt = (evt) ? evt : window.event;
                 let charCode = (evt.which) ? evt.which : evt.keyCode;
 
@@ -119,7 +124,7 @@ import lookup from "../api/lookup";
                     return true;
                 }
 
-                if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode != 9)) {
+                if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode !== 9)) {
                     evt.preventDefault();
                 } else {
                     return true;
@@ -144,7 +149,7 @@ import lookup from "../api/lookup";
                     });
             },
             populateValuta() {
-                let self = this
+                let self = this;
 
                 lookup.getValuta()
                     .then(r => {
@@ -159,7 +164,7 @@ import lookup from "../api/lookup";
                     });
             },
             populateRilegatura() {
-                let self = this
+                let self = this;
 
                 lookup.getRilegatura()
                     .then(r => {
@@ -175,7 +180,7 @@ import lookup from "../api/lookup";
             },
 
             populateConservazione() {
-                let self = this
+                let self = this;
 
                 lookup.getConservazione()
                     .then(r => {
