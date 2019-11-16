@@ -22,6 +22,14 @@
             <v-list-tile-title>Albi</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="goToSerie">
+          <v-list-tile-action>
+            <v-icon>fas fa-arrow-alt-circle-right</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Serie</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
@@ -54,6 +62,9 @@
         },
         gotToAlbi: function () {
           this.$router.push({name: "FUMETTI_ALBI"})
+        },
+        goToSerie: function () {
+          this.$router.push({name: "FUMETTI_SERIE"})
         }
       }
     }
