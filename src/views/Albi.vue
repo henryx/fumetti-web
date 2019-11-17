@@ -77,7 +77,7 @@
     import Vue from 'vue'
 
     import albi from "../api/albi"
-    import addAlbiDialog from "../components/AddAlbiDialog"
+    import albiDialog from "../components/AlbiDialog"
 
     export default {
         name: "Albi",
@@ -97,7 +97,7 @@
         },
         methods: {
             openAddAlbiDialog: function () {
-                let componentClass = Vue.extend(addAlbiDialog);
+                let componentClass = Vue.extend(albiDialog);
                 let dialog = new componentClass();
 
                 dialog.$mount();
