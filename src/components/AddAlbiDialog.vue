@@ -3,7 +3,7 @@
         <v-dialog v-model="dialog" persistent max-width="600px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Aggiungi albo</span>
+                    <span class="headline">{{titleDialog}}</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container grid-list-md>
@@ -78,6 +78,7 @@
         data: () => ({
             dateMenu: false,
             dialog: false,
+            action: "",
             serieItems: [],
             rilItems: [],
             statusItems: [],
@@ -93,6 +94,15 @@
                 note: null
             }
         }),
+        computed: {
+            titleDialog() {
+                if (this.action === "add") {
+                    return "Aggiungi albo";
+                } else {
+                    return "Modifica albo";
+                }
+            }
+        },
         methods: {
             init() {
                 this.serieItems = [];
@@ -130,8 +140,9 @@
                     return true;
                 }
             },
-            Show() {
-                this.dialog = true
+            Show(action) {
+                this.dialog = true;
+                this.action = action;
             },
             populateSerie() {
                 let self = this;

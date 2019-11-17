@@ -101,7 +101,7 @@
                 let dialog = new componentClass();
 
                 dialog.$mount();
-                dialog.Show();
+                dialog.Show("add");
             },
             searchSerie: function () {
                 let self = this;
