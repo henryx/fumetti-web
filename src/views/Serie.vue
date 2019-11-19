@@ -40,26 +40,28 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
+import serieDialog from "../components/SerieDialog";
+
 export default {
   name: "Serie",
   data() {
     return {
-      collana: ""
-    };
+      collana: "",
+      working: false,
+    }
   },
   methods: {
     searchCollana: function() {
       // TODO: search collana
     },
     openAddSerieDialog: function () {
-        // TODO: import addSerieDialog and show it
-        /*
-            let componentClass = Vue.extend(addAlbiDialog);
-            let dialog = new componentClass();
+      let componentClass = Vue.extend(serieDialog);
+      let dialog = new componentClass();
 
-            dialog.$mount();
-            dialog.Show();
-        */
+      dialog.$mount();
+      dialog.Show("add");
     }
   }
 };
