@@ -19,4 +19,7 @@ export default {
     async getFreq() {
         return Api().get("/periodicita");
     },
+    async getGenere() {
+        return Api().get("/genere_serie");
+    },
 }
