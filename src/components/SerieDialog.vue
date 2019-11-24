@@ -45,6 +45,7 @@
 </template>
 
 <script>
+    import collane from "../api/collane";
 
     export default {
         data: () => ({
@@ -76,6 +77,24 @@
         methods: {
             init() {
                 // TODO: init dialog's items
+                this.collanaItems = [];
+                this.statusItems = [];
+                this.freqItems = [];
+                this.genereItems = [];
+
+                this.populateCollane();
+            },
+            populateCollane() {
+                let self = this;
+
+                collane.getCollane()
+                    .then(r => {
+                        if (r.data.op === "ok") {
+                            for (let item of r.data.data) {
+                                self.collanaItems.push({text: item.name, value: item.id});
+                            }
+                        }
+                    });
             },
             saveSerie() {
                 // TODO: get POST to backend with data
