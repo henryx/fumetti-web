@@ -16,7 +16,7 @@
                                           required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md4>
-                                <v-select v-model="data.status_serie" label="Stato*" :items="statusItems"
+                                <v-select v-model="data.genere" label="Genere*" :items="genereItems"
                                           required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md6>
@@ -24,9 +24,9 @@
                                           required></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md6>
-                                <v-select v-model="data.genere" label="Genere*" :items="genereItems"
+                                <v-select v-model="data.status_serie" label="Stato*" :items="statusItems"
                                           required></v-select>
-                            </v-flex>
+                            </v-flex>                            
                             <v-flex xs12>
                                 <v-text-field v-model="data.note" label="Note"></v-text-field>
                             </v-flex>
