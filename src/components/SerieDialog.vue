@@ -85,6 +85,7 @@
 
                 this.populateCollane();
                 this.populateStatus();
+                this.populateFreq();
             },
             populateCollane() {
                 let self = this;
@@ -106,6 +107,18 @@
                         if (r.data.op === "ok") {
                             for (let item of r.data.data) {
                                 self.statusItems.push({text: item.name, value: item.id});
+                            }
+                        }
+                    });
+            },
+            populateFreq() {
+                let self = this;
+
+                lookup.getFreq()
+                    .then(r => {
+                        if (r.data.op === "ok") {
+                            for (let item of r.data.data) {
+                                self.freqItems.push({text: item.name, value: item.id});
                             }
                         }
                     });
