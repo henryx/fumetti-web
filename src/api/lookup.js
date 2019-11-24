@@ -16,4 +16,7 @@ export default {
     async getStatusSerie() {
         return Api().get("/status_serie");
     },
+    async getFreq() {
+        return Api().get("/periodicita");
+    },
 }
