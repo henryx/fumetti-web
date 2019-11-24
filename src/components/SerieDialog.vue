@@ -46,6 +46,7 @@
 
 <script>
     import collane from "../api/collane";
+    import lookup from "../api/lookup";
 
     export default {
         data: () => ({
@@ -83,6 +84,7 @@
                 this.genereItems = [];
 
                 this.populateCollane();
+                this.populateStatus();
             },
             populateCollane() {
                 let self = this;
@@ -92,6 +94,18 @@
                         if (r.data.op === "ok") {
                             for (let item of r.data.data) {
                                 self.collanaItems.push({text: item.name, value: item.id});
+                            }
+                        }
+                    });
+            },
+            populateStatus() {
+                let self = this;
+
+                lookup.getStatusSerie()
+                    .then(r => {
+                        if (r.data.op === "ok") {
+                            for (let item of r.data.data) {
+                                self.statusItems.push({text: item.name, value: item.id});
                             }
                         }
                     });

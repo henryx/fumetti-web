@@ -13,7 +13,7 @@ export default {
         return Api().get("/conservazione");
     },
 
-    async getStatus() {
+    async getStatusSerie() {
         return Api().get("/status_serie");
     },
 }
