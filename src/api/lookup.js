@@ -11,5 +11,9 @@ export default {
 
     async getConservazione() {
         return Api().get("/conservazione");
-    }
+    },
+
+    async getStatus() {
+        return Api().get("/status_serie");
+    },
 }
