@@ -86,6 +86,7 @@
                 this.populateCollane();
                 this.populateStatus();
                 this.populateFreq();
+                this.populateGenere();
             },
             populateCollane() {
                 let self = this;
@@ -119,6 +120,18 @@
                         if (r.data.op === "ok") {
                             for (let item of r.data.data) {
                                 self.freqItems.push({text: item.name, value: item.id});
+                            }
+                        }
+                    });
+            },
+            populateGenere() {
+                let self = this;
+
+                lookup.getGenere()
+                    .then(r => {
+                        if (r.data.op === "ok") {
+                            for (let item of r.data.data) {
+                                self.genereItems.push({text: item.name, value: item.id});
                             }
                         }
                     });
