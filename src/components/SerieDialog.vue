@@ -47,6 +47,7 @@
 <script>
     import collane from "../api/collane";
     import lookup from "../api/lookup";
+    import serie from "../api/serie";
 
     export default {
         data: () => ({
@@ -137,7 +138,15 @@
                     });
             },
             saveSerie() {
-                // TODO: get POST to backend with data
+                 let self = this;
+
+                serie.postSerie(this.data)
+                    .then(() => {
+                        self.dialog = false;
+                    })
+                    .catch(() => {
+                        // TODO: manage exception if POST fails
+                    });
             },
             Show(action) {
                 this.dialog = true;
