@@ -66,7 +66,7 @@ export default {
                     .then(r => {
                         if (r.data.op === "ok") {
                             for (let item of r.data.data) {
-                                self.collanaItems.push({text: item.name, value: item.id});
+                                self.editoreItems.push({text: item.name, value: item.id});
                             }
                         }
                     });
